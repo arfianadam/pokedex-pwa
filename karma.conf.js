@@ -41,11 +41,11 @@ module.exports = function (config) {
           { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
           {
             test: /\.less$/,
-            loader: 'style-loader!css-loader?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss-loader!less-loader?outputStyle=expanded&sourceMap'
+            loader: 'style-loader!css-loader?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss-loader?sourceMap!less-loader?outputStyle=expanded&sourceMap'
           },
           {
             test: /\.scss$/,
-            loader: 'style-loader!css-loader?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss-loader!sass-loader?outputStyle=expanded&sourceMap'
+            loader: 'style-loader!css-loader?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss-loader?sourceMap!sass-loader?outputStyle=expanded&sourceMap'
           }
         ]
       },
