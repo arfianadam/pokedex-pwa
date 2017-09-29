@@ -1,6 +1,6 @@
 {
-  "short_name": "Simply React",
-  "name": "React redux universal hot example",
+  "short_name": "PokedexPWA",
+  "name": "Pokedex now on PWA!",
   "icons": [
     {
       "src": "launcher-icon-2x.png",
