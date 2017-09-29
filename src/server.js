@@ -12,7 +12,7 @@ import { match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
-import { Provider } from 'components';
+import Provider from 'components/Provider/Provider';
 import config from 'config';
 import createStore from 'redux/create';
 import ApiClient from 'helpers/ApiClient';

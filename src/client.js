@@ -12,7 +12,7 @@ import { AppContainer as HotEnabler } from 'react-hot-loader';
 import { useScroll } from 'react-router-scroll';
 import { getStoredState } from 'redux-persist';
 import localForage from 'localforage';
-import { Provider } from 'components';
+import Provider from 'components/Provider/Provider';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import getRoutes from './routes';
