@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-// import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
 import config from 'config';
+
+import Header from 'containers/Header';
 
 export default class App extends Component {
   static propTypes = {
@@ -19,10 +19,7 @@ export default class App extends Component {
       <MuiThemeProvider>
         <div className={styles.app}>
           <Helmet {...config.app.head} />
-          <AppBar
-            title={config.app.title}
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
-          />
+          <Header />
           {children}
         </div>
       </MuiThemeProvider>
