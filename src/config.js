@@ -12,7 +12,7 @@ const environment = {
 module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
   port: process.env.PORT,
-  apiHost: process.env.APIHOST || 'localhost',
+  apiHost: process.env.APIHOST || 'pokeapi.salestock.net/api/v2',
   apiPort: process.env.APIPORT,
   app: {
     title: 'PokedexPWA',
