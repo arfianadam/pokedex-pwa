@@ -1,3 +1,11 @@
+@import '~theme/variables.scss';
+
 .PokemonTypeDummy {
-  /* Your stylesheet here */
+  display: flex;
+  flex-wrap: wrap;
+  padding: $space;
+
+  .chip {
+    margin: 0 $space/2 $space/2 0 !important;
+  }
 }

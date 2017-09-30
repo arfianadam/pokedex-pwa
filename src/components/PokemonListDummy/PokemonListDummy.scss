@@ -1,4 +1,8 @@
+@import '~theme/variables.scss';
+
 .PokemonListDummy {
   display: flex;
   flex-wrap: wrap;
+
+  padding: $space/2;
 }

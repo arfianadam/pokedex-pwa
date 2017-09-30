@@ -8,6 +8,7 @@ import counter from './modules/counter';
 import info from './modules/info';
 import pokemon from './modules/pokemon';
 import search from './modules/search';
+import type from './modules/type';
 // import widgets from './modules/widgets';
 // import survey from './modules/survey';
 // import chat from './modules/chat';
@@ -28,6 +29,7 @@ export default function createReducers(asyncReducers) {
     info,
     pokemon,
     search,
+    type,
     // widgets,
     // survey,
     // chat,
