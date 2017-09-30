@@ -9,6 +9,7 @@ export default () => (
   <Route path="/" component={App}>
     {/* Home (main) route */}
     <IndexRoute getComponent={() => System.import('./containers/Home/Home')} />
+    <Route path="search" getComponent={() => System.import('./containers/Search/Search')} />
 
     {/* Routes */}
 

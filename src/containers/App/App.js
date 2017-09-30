@@ -8,18 +8,19 @@ import Header from 'containers/Header';
 
 export default class App extends Component {
   static propTypes = {
-    children: PropTypes.object.isRequired
+    children: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
   };
 
   render() {
-    const { children } = this.props;
+    const { children, location } = this.props;
     const styles = require('./App.scss');
 
     return (
       <MuiThemeProvider>
         <div className={styles.app}>
           <Helmet {...config.app.head} />
-          <Header />
+          <Header path={location.pathname} />
           {children}
         </div>
       </MuiThemeProvider>

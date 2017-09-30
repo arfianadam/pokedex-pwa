@@ -8,7 +8,6 @@ export default class Home extends Component {
     return (
       <div className={styles.home}>
         <Helmet title="Home" />
-        <h1>Hello!</h1>
         <PokemonList />
       </div>
     );
