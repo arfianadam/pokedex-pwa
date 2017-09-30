@@ -48,7 +48,12 @@ export default class HeaderDummy extends Component {
           docked={false}
           open={isDrawerOpen}
           onRequestChange={this.toggleDrawer}
-        />
+        >
+          <List>
+            <ListItem primaryText="Janet Perkins Bennet" />
+            <ListItem primaryText="Peter Carlsson" />
+          </List>
+        </Drawer>
       </div>
     );
   }
