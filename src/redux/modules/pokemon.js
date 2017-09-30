@@ -3,10 +3,12 @@ const request = new ApiClient();
 
 const LOAD = 'pokedex-pwa/pokemon/LOAD';
 const LOAD_SUCCESS = 'pokedex-pwa/pokemon/LOAD_SUCCESS';
+const LOAD_ALL_SUCCESS = 'pokedex-pwa/pokemon/LOAD_ALL_SUCCESS';
 
 const initialState = {
   pokemon: [],
-  loading: false
+  loading: false,
+  allLoaded: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -21,6 +23,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         pokemon: [...state.pokemon, ...action.payload],
         loading: false
+      };
+    case LOAD_ALL_SUCCESS:
+      return {
+        ...state,
+        allLoaded: true
       };
     default:
       return state;
@@ -56,6 +63,12 @@ function mapPokemonId(pokemon, index) {
   };
 }
 
+function finishedLoadingAll() {
+  return {
+    type: LOAD_ALL_SUCCESS
+  };
+}
+
 export function loadListPokemon(page = 1, limit = 60, toEnd = false) {
   return dispatch => {
     dispatch(startLoad());
@@ -64,6 +77,9 @@ export function loadListPokemon(page = 1, limit = 60, toEnd = false) {
         dispatch(saveListPokemon(res.results.map(mapPokemonId)));
         if (toEnd && res.next) {
           dispatch(loadListPokemon(page + 1, 60, true));
+        }
+        if (toEnd && !res.next) {
+          dispatch(finishedLoadingAll());
         }
         // const promises = [];
         // res.results.forEach(pokemon => {

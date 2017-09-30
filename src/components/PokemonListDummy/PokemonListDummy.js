@@ -14,7 +14,7 @@ export default class PokemonListDummy extends Component {
   }
 
   renderCard = pokemon => (
-    <PokemonListCard pokemon={pokemon} />
+    <PokemonListCard key={pokemon.name} pokemon={pokemon} />
   )
 
   render() {
