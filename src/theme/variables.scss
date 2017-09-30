@@ -22,3 +22,8 @@ $text-color: #333;
 
 $font-size-base: 14px;
 $font-family-sans-serif: "Helvetica Neue", Helvetica, sans-serif;
+
+$grey: #CCCCCC;
+$grey-light: lighten($grey, 20%);
+
+$space: 16px;

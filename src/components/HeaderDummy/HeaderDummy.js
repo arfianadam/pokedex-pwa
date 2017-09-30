@@ -5,13 +5,15 @@ import Drawer from 'material-ui/Drawer';
 import { List, ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
+import NavigationBack from 'material-ui/svg-icons/navigation/arrow-back';
 import ActionSearch from 'material-ui/svg-icons/action/search';
 import styles from './HeaderDummy.scss';
 
 export default class HeaderDummy extends Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
-    navigateTo: PropTypes.func.isRequired
+    title: PropTypes.node.isRequired,
+    navigateTo: PropTypes.func.isRequired,
+    path: PropTypes.string.isRequired
   }
 
   constructor(props) {
@@ -21,17 +23,29 @@ export default class HeaderDummy extends Component {
     };
   }
 
-  getDrawerIcon = () => (
-    <IconButton
-      onClick={this.toggleDrawer}
-    >
-      <NavigationMenu />
-    </IconButton>
-  )
+  getLeftIcon = () => {
+    const { path } = this.props;
+    if (path === '/') {
+      return (
+        <IconButton
+          onClick={this.toggleDrawer}
+        >
+          <NavigationMenu />
+        </IconButton>
+      );
+    }
+    return (
+      <IconButton
+        onClick={this.navigateTo('/')}
+      >
+        <NavigationBack />
+      </IconButton>
+    );
+  }
 
   getSearchIcon = () => (
     <IconButton
-      onClick={this.goToSearch}
+      onClick={this.navigateTo('/search')}
     >
       <ActionSearch />
     </IconButton>
@@ -41,14 +55,14 @@ export default class HeaderDummy extends Component {
     this.setState(prevState => (
       {
         ...prevState,
-        isDrawerOpen: nextState || !prevState.isDrawerOpen
+        isDrawerOpen: (typeof nextState === 'boolean') ? nextState : !prevState.isDrawerOpen
       }
     ));
   }
 
-  goToSearch = () => {
+  navigateTo = path => () => {
     const { navigateTo } = this.props;
-    navigateTo('/search');
+    navigateTo(path);
   }
 
   render() {
@@ -58,7 +72,7 @@ export default class HeaderDummy extends Component {
       <div className={styles.HeaderDummy}>
         <AppBar
           title={title}
-          iconElementLeft={this.getDrawerIcon()}
+          iconElementLeft={this.getLeftIcon()}
           iconElementRight={this.getSearchIcon()}
           style={{
             position: 'fixed',
