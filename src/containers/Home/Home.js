@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
+import PokemonList from 'containers/PokemonList';
 
 export default class Home extends Component {
   render() {
@@ -8,6 +9,7 @@ export default class Home extends Component {
       <div className={styles.home}>
         <Helmet title="Home" />
         <h1>Hello!</h1>
+        <PokemonList />
       </div>
     );
   }

@@ -1,0 +1,6 @@
+{
+  "name": "PokemonListDummy",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./PokemonListDummy.js"
+}
