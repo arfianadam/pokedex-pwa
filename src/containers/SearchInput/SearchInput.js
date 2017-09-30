@@ -37,6 +37,7 @@ export default class SearchInput extends Component {
   search = e => {
     e.preventDefault();
     const { dispatch, search } = this.props;
+    this.input.blur();
     dispatch(searchNow(search.value));
   }
 

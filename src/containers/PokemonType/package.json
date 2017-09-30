@@ -1,0 +1,6 @@
+{
+  "name": "PokemonType",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./PokemonType.js"
+}

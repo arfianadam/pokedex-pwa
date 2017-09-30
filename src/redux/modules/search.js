@@ -12,7 +12,7 @@ export default function reducer(state = initialState, action = {}) {
     case CLEAR:
       return {
         ...state,
-        value: ''
+        ...initialState
       };
     case EDIT_VALUE:
       return {
