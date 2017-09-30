@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import Fuse from 'fuse.js';
 import PokemonType from 'containers/PokemonType';
@@ -36,6 +37,7 @@ export default class Search extends Component {
     const filteredPokemon = fuse.search(search.searchQuery);
     return (
       <div className={styles.Search}>
+        <Helmet title="Search" />
         {search.searchQuery === '' &&
           <PokemonType />
         }

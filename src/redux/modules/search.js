@@ -1,6 +1,6 @@
-const CLEAR = 'pokedex-pwa/pokemon/CLEAR';
-const EDIT_VALUE = 'pokedex-pwa/pokemon/EDIT_VALUE';
-const SEARCH_NOW = 'pokedex-pwa/pokemon/SEARCH_NOW';
+const CLEAR = 'pokedex-pwa/search/CLEAR';
+const EDIT_VALUE = 'pokedex-pwa/search/EDIT_VALUE';
+const SEARCH_NOW = 'pokedex-pwa/search/SEARCH_NOW';
 
 const initialState = {
   value: '',
