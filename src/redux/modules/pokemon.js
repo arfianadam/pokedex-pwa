@@ -56,10 +56,14 @@ export function loadDetailPokemon(url) {
   });
 }
 
-function mapPokemonId(pokemon, index) {
+function getPokemonId(url) {
+  return url.substring(44, url.lastIndexOf('/'));
+}
+
+function mapPokemonId(pokemon) {
   return {
     ...pokemon,
-    id: index + 1
+    id: getPokemonId(pokemon.url)
   };
 }
 
