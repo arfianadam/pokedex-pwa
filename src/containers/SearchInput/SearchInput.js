@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { clearSearchInput, editSearchInput } from 'redux/modules/search';
+import { clearSearchInput, editValue, searchNow } from 'redux/modules/search';
 import TextField from 'material-ui/TextField';
 // import styles from './SearchInput.scss';
 
@@ -31,24 +31,32 @@ export default class SearchInput extends Component {
   onChange = e => {
     const { dispatch } = this.props;
     e.persist();
-    dispatch(editSearchInput(e.target.value));
+    dispatch(editValue(e.target.value));
+  }
+
+  search = e => {
+    e.preventDefault();
+    const { dispatch, search } = this.props;
+    dispatch(searchNow(search.value));
   }
 
   render() {
     const { search } = this.props;
     return (
-      <TextField
-        value={search.value}
-        hintText="Search pokemon..."
-        hintStyle={{
-          color: 'rgba(255, 255, 255, 0.4)'
-        }}
-        inputStyle={{
-          color: 'white'
-        }}
-        ref={input => { this.input = input; }}
-        onChange={this.onChange}
-      />
+      <form onSubmit={this.search}>
+        <TextField
+          value={search.value}
+          hintText="Search pokemon..."
+          hintStyle={{
+            color: 'rgba(255, 255, 255, 0.4)'
+          }}
+          inputStyle={{
+            color: 'white'
+          }}
+          ref={input => { this.input = input; }}
+          onChange={this.onChange}
+        />
+      </form>
     );
   }
 }
