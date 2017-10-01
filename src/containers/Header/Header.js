@@ -8,13 +8,15 @@ import SearchInput from 'containers/SearchInput';
 import HeaderDummy from 'components/HeaderDummy';
 
 @connect(state => ({
-  search: state.search
+  search: state.search,
+  type: state.type.detail
 }))
 export default class Header extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     search: PropTypes.object.isRequired,
-    path: PropTypes.string.isRequired
+    path: PropTypes.string.isRequired,
+    type: PropTypes.object.isRequired
   }
 
   constructor(props) {
@@ -23,14 +25,14 @@ export default class Header extends Component {
   }
 
   getTitle = () => {
-    const { path } = this.props;
-    switch (path) {
-      case '/':
-        return config.app.title;
-      case '/search':
+    const { path, type } = this.props;
+    switch (true) {
+      case /\/search/.test(path):
         return (
           <SearchInput />
         );
+      case /\/type\//.test(path):
+        return `Type ${type.name || '...'}`;
       default:
         return config.app.title;
     }
