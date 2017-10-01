@@ -13,6 +13,7 @@ export default class HeaderDummy extends Component {
   static propTypes = {
     title: PropTypes.node.isRequired,
     navigateTo: PropTypes.func.isRequired,
+    search: PropTypes.func.isRequired,
     path: PropTypes.string.isRequired
   }
 
@@ -43,13 +44,34 @@ export default class HeaderDummy extends Component {
     );
   }
 
-  getSearchIcon = () => (
-    <IconButton
-      onClick={this.navigateTo('/search')}
-    >
-      <ActionSearch />
-    </IconButton>
-  )
+  getRightIcon = () => {
+    const { path } = this.props;
+    switch (path) {
+      case '/':
+        return (
+          <IconButton
+            onClick={this.navigateTo('/search')}
+          >
+            <ActionSearch />
+          </IconButton>
+        );
+      case '/search':
+        return (
+          <IconButton
+            onClick={this.search}
+          >
+            <ActionSearch />
+          </IconButton>
+        );
+      default:
+        return null;
+    }
+  }
+
+  search = () => {
+    const { search } = this.props;
+    search();
+  }
 
   toggleDrawer = (nextState) => {
     this.setState(prevState => (
@@ -73,7 +95,7 @@ export default class HeaderDummy extends Component {
         <AppBar
           title={title}
           iconElementLeft={this.getLeftIcon()}
-          iconElementRight={this.getSearchIcon()}
+          iconElementRight={this.getRightIcon()}
           style={{
             position: 'fixed',
             top: 0

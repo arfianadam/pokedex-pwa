@@ -3,13 +3,17 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import config from 'config';
+import { searchNow } from 'redux/modules/search';
 import SearchInput from 'containers/SearchInput';
 import HeaderDummy from 'components/HeaderDummy';
 
-@connect()
+@connect(state => ({
+  search: state.search
+}))
 export default class Header extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
+    search: PropTypes.object.isRequired,
     path: PropTypes.string.isRequired
   }
 
@@ -37,6 +41,11 @@ export default class Header extends Component {
     dispatch(push(path));
   }
 
+  search = () => {
+    const { dispatch, search } = this.props;
+    dispatch(searchNow(search.value));
+  }
+
   render() {
     const { path } = this.props;
     return (
@@ -44,6 +53,7 @@ export default class Header extends Component {
         title={this.getTitle()}
         path={path}
         navigateTo={this.navigateTo}
+        search={this.search}
       />
     );
   }
