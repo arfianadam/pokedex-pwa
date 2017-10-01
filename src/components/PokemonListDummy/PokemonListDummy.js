@@ -7,6 +7,7 @@ const PER_PAGE = 20;
 
 export default class PokemonListDummy extends Component {
   static propTypes = {
+    navigateTo: PropTypes.func.isRequired,
     pokemon: PropTypes.array.isRequired
   }
 
@@ -55,7 +56,7 @@ export default class PokemonListDummy extends Component {
   }
 
   renderCard = pokemon => (
-    <PokemonListCard key={pokemon.name} pokemon={pokemon} />
+    <PokemonListCard key={pokemon.name} pokemon={pokemon} navigateTo={this.props.navigateTo} />
   )
 
   render() {
