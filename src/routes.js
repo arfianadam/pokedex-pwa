@@ -10,6 +10,7 @@ export default () => (
     {/* Home (main) route */}
     <IndexRoute getComponent={() => System.import('./containers/Home/Home')} />
     <Route path="search" getComponent={() => System.import('./containers/Search/Search')} />
+    <Route path="pokemon/:id" getComponent={() => System.import('./containers/Pokemon/Pokemon')} />
     <Route path="type/:id" getComponent={() => System.import('./containers/Type/Type')} />
 
     {/* Routes */}

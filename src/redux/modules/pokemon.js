@@ -5,11 +5,14 @@ const request = new ApiClient();
 const LOAD = 'pokedex-pwa/pokemon/LOAD';
 const LOAD_SUCCESS = 'pokedex-pwa/pokemon/LOAD_SUCCESS';
 const LOAD_ALL_SUCCESS = 'pokedex-pwa/pokemon/LOAD_ALL_SUCCESS';
+const SAVE_DETAIL_POKEMON = 'pokedex-pwa/pokemon/SAVE_DETAIL_POKEMON';
+const CLEAR_DETAIL_POKEMON = 'pokedex-pwa/pokemon/CLEAR_DETAIL_POKEMON';
 
 const initialState = {
   pokemon: [],
   loading: false,
-  allLoaded: false
+  allLoaded: false,
+  detail: {}
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -30,6 +33,17 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         allLoaded: true
       };
+    case SAVE_DETAIL_POKEMON:
+      return {
+        ...state,
+        detail: action.payload,
+        loading: false
+      };
+    case CLEAR_DETAIL_POKEMON:
+      return {
+        ...state,
+        detail: {}
+      };
     default:
       return state;
   }
@@ -48,13 +62,27 @@ function saveListPokemon(list) {
   };
 }
 
-export function loadDetailPokemon(url) {
-  return () => new Promise((resolve) => {
-    request.get(url, {}, true)
+function saveDetailPokemon(detail) {
+  return {
+    type: SAVE_DETAIL_POKEMON,
+    payload: detail
+  };
+}
+
+export function clearDetailPokemon() {
+  return {
+    type: CLEAR_DETAIL_POKEMON
+  };
+}
+
+export function loadDetailPokemon(id) {
+  return dispatch => {
+    dispatch(startLoad());
+    request.get(`/pokemon/${id}`)
       .then(res => {
-        resolve(res);
+        dispatch(saveDetailPokemon(res));
       });
-  });
+  };
 }
 
 function mapPokemonId(pokemon) {

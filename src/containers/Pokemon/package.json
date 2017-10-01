@@ -1,0 +1,6 @@
+{
+  "name": "Pokemon",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Pokemon.js"
+}
