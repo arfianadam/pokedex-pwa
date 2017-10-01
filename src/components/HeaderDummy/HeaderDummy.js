@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
-import { List, ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import NavigationBack from 'material-ui/svg-icons/navigation/arrow-back';
@@ -106,10 +105,12 @@ export default class HeaderDummy extends Component {
           open={isDrawerOpen}
           onRequestChange={this.toggleDrawer}
         >
-          <List>
-            <ListItem primaryText="Janet Perkins Bennet" />
-            <ListItem primaryText="Peter Carlsson" />
-          </List>
+          <img
+            src="/logo.png"
+            alt="logo"
+            className={styles.drawerImg}
+          />
+          <p>By Arfian Adam</p>
         </Drawer>
       </div>
     );
