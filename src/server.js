@@ -18,6 +18,7 @@ import createStore from 'redux/create';
 import ApiClient from 'helpers/ApiClient';
 import Html from 'helpers/Html';
 import getRoutes from 'routes';
+import request from 'superagent';
 
 process.on('unhandledRejection', error => console.error(error));
 
@@ -29,6 +30,15 @@ app.use(cookieParser());
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 app.get('/manifest.json', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'manifest.json')));
+
+app.get('/api/v2*', (req, res) => {
+  const url = req.url;
+  request
+    .get(`http://pokeapi.salestock.net${url}`)
+    .end((err, apires) => {
+      res.send(apires.body);
+    })
+});
 
 app.use('/dist/service-worker.js', (req, res, next) => {
   res.setHeader('Service-Worker-Allowed', '/');
