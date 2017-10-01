@@ -206,7 +206,7 @@ module.exports = {
       verbose: true,
       navigateFallback: '/dist/index.html',
       runtimeCaching: [{
-        urlPattern: /pokeapi\.salestock\.net\/api\/v2\/(.*)/,
+        urlPattern: /api\/v2\/(.*)/,
         handler: 'cacheFirst',
         options: {
           debug: true
