@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import LoadingIndicator from 'components/LoadingIndicator';
 import styles from './PokemonDummy.scss';
 
 export default class PokemonDummy extends Component {
@@ -17,7 +18,7 @@ export default class PokemonDummy extends Component {
     return (
       <div className={styles.PokemonDummy}>
         {pokemon.name}
-        {loading && 'loading'}
+        <LoadingIndicator loading={loading} />
       </div>
     );
   }

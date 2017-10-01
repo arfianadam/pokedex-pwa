@@ -42,7 +42,6 @@ export default class PokemonListDummy extends Component {
     if ((((page + 1) * PER_PAGE) - pokemon.length) < PER_PAGE) {
       if (!isSlicing) {
         if (window.innerHeight + window.scrollY > document.body.offsetHeight - 400) {
-          console.log('load!');
           this.setState(() => ({
             isSlicing: true
           }), () => {
