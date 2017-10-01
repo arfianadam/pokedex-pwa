@@ -3,6 +3,11 @@
 .PokemonListDummy {
   display: flex;
   flex-wrap: wrap;
-
   padding: $space/2;
+
+  p {
+    padding: $space;
+    text-align: center;
+    width: 100%;
+  }
 }
