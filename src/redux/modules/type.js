@@ -1,5 +1,5 @@
 import ApiClient from 'helpers/ApiClient';
-import { getPokemonId } from 'helpers/polyfill';
+import { getTypeId, getPokemonId } from 'helpers/polyfill';
 const request = new ApiClient();
 
 const LOAD = 'pokedex-pwa/type/LOAD';
@@ -91,10 +91,6 @@ export function clearDetailType() {
   return {
     type: CLEAR_DETAIL_TYPE
   };
-}
-
-function getTypeId(url) {
-  return url.substring(41, url.lastIndexOf('/'));
 }
 
 function mapTypeId(Type) {

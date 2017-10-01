@@ -5,3 +5,7 @@ export function capitalizeFirstLetter(string) {
 export function getPokemonId(url) {
   return url.substring(44, url.lastIndexOf('/'));
 }
+
+export function getTypeId(url) {
+  return url.substring(41, url.lastIndexOf('/'));
+}

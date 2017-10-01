@@ -1,3 +1,30 @@
+@import '~theme/variables.scss';
+
 .PokemonDummy {
-  /* Your stylesheet here */
+  padding: $space;
+
+  header {
+    .typeContainer{
+      display: flex;
+      flex-wrap: wrap;
+      margin: $space 0;
+      .type {
+        margin: 0 $space/2 $space/2 0 !important;
+      }
+    }
+    img {
+      width: 50%;
+
+      @media (min-width: 768px) {
+        width: 20%;
+      }
+    }
+  }
+
+  main {
+    .paper {
+      padding: $space;
+      margin-bottom: $space;
+    }
+  }
 }

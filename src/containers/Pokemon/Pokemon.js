@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { clearDetailPokemon, loadDetailPokemon } from 'redux/modules/pokemon';
 import PokemonDummy from 'components/PokemonDummy';
 import styles from './Pokemon.scss';
@@ -30,6 +31,11 @@ export default class Pokemon extends Component {
     dispatch(clearDetailPokemon());
   }
 
+  navigateTo = path => () => {
+    const { dispatch } = this.props;
+    dispatch(push(path));
+  }
+
   render() {
     const { pokemon } = this.props;
     return (
@@ -37,6 +43,7 @@ export default class Pokemon extends Component {
         <PokemonDummy
           pokemon={pokemon.detail}
           loading={pokemon.loading}
+          navigateTo={this.navigateTo}
         />
       </div>
     );
