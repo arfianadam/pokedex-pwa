@@ -1,0 +1,10 @@
+.TypeDummy {
+  .loadingContainer {
+    display: flex;
+    justify-content: center;
+
+    .loadingWrapper {
+      position: relative;
+    }
+  }
+}

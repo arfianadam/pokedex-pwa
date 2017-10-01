@@ -1,4 +1,5 @@
 import ApiClient from 'helpers/ApiClient';
+import { getPokemonId } from 'helpers/polyfill';
 const request = new ApiClient();
 
 const LOAD = 'pokedex-pwa/pokemon/LOAD';
@@ -54,10 +55,6 @@ export function loadDetailPokemon(url) {
         resolve(res);
       });
   });
-}
-
-function getPokemonId(url) {
-  return url.substring(44, url.lastIndexOf('/'));
 }
 
 function mapPokemonId(pokemon) {

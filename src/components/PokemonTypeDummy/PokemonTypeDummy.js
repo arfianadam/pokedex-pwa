@@ -6,7 +6,8 @@ import styles from './PokemonTypeDummy.scss';
 
 export default class PokemonTypeDummy extends Component {
   static propTypes = {
-    type: PropTypes.array.isRequired
+    type: PropTypes.array.isRequired,
+    navigateTo: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -15,7 +16,8 @@ export default class PokemonTypeDummy extends Component {
   }
 
   handleClick = id => () => {
-    console.log(id);
+    const { navigateTo } = this.props;
+    navigateTo(`/type/${id}`);
   }
 
   mapType = type => (

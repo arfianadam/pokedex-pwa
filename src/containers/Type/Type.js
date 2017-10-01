@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
-import { loadListType } from 'redux/modules/type';
-import PokemonTypeDummy from 'components/PokemonTypeDummy';
+import { clearDetailType, loadDetailType } from 'redux/modules/type';
+import TypeDummy from 'components/TypeDummy';
 
 @connect(state => ({
   type: state.type
 }))
-export default class PokemonType extends Component {
+export default class Type extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
+    params: PropTypes.object.isRequired,
     type: PropTypes.object.isRequired
   }
 
@@ -20,23 +20,21 @@ export default class PokemonType extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, type } = this.props;
-    if (!type.allLoaded) {
-      dispatch(loadListType(1, 60, true));
-    }
+    const { dispatch, params } = this.props;
+    dispatch(loadDetailType(params.id));
   }
 
-  navigateTo = path => {
+  componentWillUnmount() {
     const { dispatch } = this.props;
-    dispatch(push(path));
+    dispatch(clearDetailType());
   }
 
   render() {
     const { type } = this.props;
     return (
-      <PokemonTypeDummy
-        type={type.type}
-        navigateTo={this.navigateTo}
+      <TypeDummy
+        type={type.detail}
+        loading={type.loading}
       />
     );
   }

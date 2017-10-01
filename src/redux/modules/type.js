@@ -1,14 +1,18 @@
 import ApiClient from 'helpers/ApiClient';
+import { getPokemonId } from 'helpers/polyfill';
 const request = new ApiClient();
 
 const LOAD = 'pokedex-pwa/type/LOAD';
 const LOAD_SUCCESS = 'pokedex-pwa/type/LOAD_SUCCESS';
 const LOAD_ALL_SUCCESS = 'pokedex-pwa/type/LOAD_ALL_SUCCESS';
+const SAVE_DETAIL_TYPE = 'pokedex-pwa/type/SAVE_DETAIL_TYPE';
+const CLEAR_DETAIL_TYPE = 'pokedex-pwa/type/CLEAR_DETAIL_TYPE';
 
 const initialState = {
   type: [],
   loading: false,
-  allLoaded: false
+  allLoaded: false,
+  detail: {}
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -29,6 +33,17 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         allLoaded: true
       };
+    case SAVE_DETAIL_TYPE:
+      return {
+        ...state,
+        detail: action.payload,
+        loading: false
+      };
+    case CLEAR_DETAIL_TYPE:
+      return {
+        ...state,
+        detail: {}
+      };
     default:
       return state;
   }
@@ -47,13 +62,35 @@ function saveListType(list) {
   };
 }
 
-export function loadDetailType(url) {
-  return () => new Promise((resolve) => {
-    request.get(url, {}, true)
+function saveDetailType(detail) {
+  return {
+    type: SAVE_DETAIL_TYPE,
+    payload: detail
+  };
+}
+
+function mapPokemonId(pokemon) {
+  return { ...pokemon.pokemon, id: getPokemonId(pokemon.pokemon.url) };
+}
+
+export function loadDetailType(id) {
+  return dispatch => {
+    dispatch(startLoad());
+    request.get(`/type/${id}`)
       .then(res => {
-        resolve(res);
+        const mappedPokemon = res.pokemon.map(mapPokemonId);
+        dispatch(saveDetailType({
+          ...res,
+          pokemon: mappedPokemon
+        }));
       });
-  });
+  };
+}
+
+export function clearDetailType() {
+  return {
+    type: CLEAR_DETAIL_TYPE
+  };
 }
 
 function getTypeId(url) {
