@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { capitalizeFirstLetter, getTypeId } from 'helpers/polyfill';
 import Chip from 'material-ui/Chip';
@@ -84,6 +85,7 @@ export default class PokemonDummy extends Component {
       <div className={styles.PokemonDummy}>
         {pokemon.name &&
           <article>
+            <Helmet title={capitalizeFirstLetter(pokemon.name)} />
             <header>
               <div className={styles.sprites}>
                 {this.renderSprites(pokemon)}
