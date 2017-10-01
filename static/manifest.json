@@ -1,6 +1,6 @@
 {
   "short_name": "PokedexPWA",
-  "name": "Pokedex now on PWA!",
+  "name": "PokedexPWA",
   "icons": [
     {
       "src": "launcher-icon-2x.png",
@@ -21,6 +21,6 @@
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#3677dd",
-  "background_color": "#3677dd"
+  "theme_color": "#0288d1",
+  "background_color": "#0288d1"
 }

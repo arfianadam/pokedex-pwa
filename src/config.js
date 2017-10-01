@@ -23,7 +23,7 @@ module.exports = Object.assign({
         { name: 'description', content: 'Pokedex now on PWA!' },
         { charset: 'utf-8' },
         { property: 'og:site_name', content: 'PokedexPWA' },
-        { property: 'og:image', content: 'https://react-redux.herokuapp.com/logo.jpg' },
+        { property: 'og:image', content: 'https://pokedex.arfianadam.com/logo.png' },
         { property: 'og:locale', content: 'en_US' },
         { property: 'og:title', content: 'PokedexPWA' },
         { property: 'og:description', content: 'Pokedex now on PWA!' },
