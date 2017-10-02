@@ -112,6 +112,7 @@ export default class HeaderDummy extends Component {
             className={styles.drawerImg}
           />
           <p>By Arfian Adam</p>
+          <p>Visit me on <a href="https://github.com/arfianadam">Github</a>!</p>
         </Drawer>
       </div>
     );
