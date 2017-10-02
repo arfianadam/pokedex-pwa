@@ -75,12 +75,26 @@ export function clearDetailPokemon() {
   };
 }
 
+function loadMoreDetailPokemon(id) {
+  return previousRes => new Promise(resolve => {
+    request
+      .get(`/pokemon-species/${id}`)
+      .then(res => {
+        resolve({
+          ...previousRes,
+          species: res
+        });
+      });
+  });
+}
+
 export function loadDetailPokemon(id) {
   return dispatch => {
     dispatch(startLoad());
     request.get(`/pokemon/${id}`)
-      .then(res => {
-        dispatch(saveDetailPokemon(res));
+      .then(loadMoreDetailPokemon(id))
+      .then(resMore => {
+        dispatch(saveDetailPokemon(resMore));
       });
   };
 }

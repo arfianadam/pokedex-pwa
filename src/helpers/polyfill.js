@@ -9,3 +9,7 @@ export function getPokemonId(url) {
 export function getTypeId(url) {
   return url.substring(41, url.lastIndexOf('/'));
 }
+
+export function removeUnderscore(str) {
+  return str.replace('_', ' ');
+}

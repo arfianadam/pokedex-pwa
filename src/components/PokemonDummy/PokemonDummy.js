@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import { capitalizeFirstLetter, getTypeId } from 'helpers/polyfill';
+import { capitalizeFirstLetter, getTypeId, removeUnderscore } from 'helpers/polyfill';
 import Chip from 'material-ui/Chip';
 import Paper from 'material-ui/Paper';
 import LoadingIndicator from 'components/LoadingIndicator';
@@ -22,7 +22,24 @@ const detailsOrder = [
   'id',
   'name',
   'weight',
-  'height'
+  'height',
+  'base_experience',
+  'abilities'
+];
+
+const speciesOrder = [
+  'capture_rate',
+  'base_happiness',
+  'habitat',
+  'color',
+  'shape',
+  'generation',
+  'growth_rate'
+];
+
+const speciesDirectValue = [
+  speciesOrder[0],
+  speciesOrder[1]
 ];
 
 export default class PokemonDummy extends Component {
@@ -60,12 +77,38 @@ export default class PokemonDummy extends Component {
     return null;
   }
 
-  mapDetails = pokemon => detail => (
-    <tr key={detail}>
-      <th>{capitalizeFirstLetter(detail)}</th>
-      <td>{detail === 'name' ? capitalizeFirstLetter(pokemon[detail]) : pokemon[detail]}</td>
-    </tr>
-  )
+  mapDetails = pokemon => detail => {
+    let detailValue = pokemon[detail];
+    if (detail === 'weight') {
+      detailValue = `${detailValue / 10} Kg`;
+    } else if (detail === 'height') {
+      detailValue = `${detailValue / 10} Meters`;
+    } else if (detail === 'abilities') {
+      const abilitiesArray = detailValue.map(ability => capitalizeFirstLetter(ability.ability.name));
+      detailValue = abilitiesArray.join(', ');
+    }
+    return (
+      <tr key={detail}>
+        <th>{capitalizeFirstLetter(removeUnderscore(detail))}</th>
+        <td>{detail === 'name' ? capitalizeFirstLetter(detailValue) : detailValue}</td>
+      </tr>
+    );
+  }
+
+  mapSpecies = species => detail => {
+    let detailValue = species[detail].name;
+    if (speciesDirectValue.indexOf(detail) > -1) {
+      detailValue = species[detail];
+    } else {
+      detailValue = capitalizeFirstLetter(detailValue);
+    }
+    return (
+      <tr key={detail}>
+        <th>{capitalizeFirstLetter(removeUnderscore(detail))}</th>
+        <td>{detailValue}</td>
+      </tr>
+    );
+  }
 
   mapStats = stat => (
     <tr key={stat.stat.name}>
@@ -96,26 +139,24 @@ export default class PokemonDummy extends Component {
             </header>
             <main>
               <Paper className={styles.paper}>
+                <h3>Info</h3>
                 <table className="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Details</th>
-                      <th>Value</th>
-                    </tr>
-                  </thead>
                   <tbody>
                     {detailsOrder.map(this.mapDetails(pokemon))}
                   </tbody>
                 </table>
               </Paper>
               <Paper className={styles.paper}>
+                <h3>More Details</h3>
                 <table className="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Stats</th>
-                      <th>Value</th>
-                    </tr>
-                  </thead>
+                  <tbody>
+                    {speciesOrder.map(this.mapSpecies(pokemon.species))}
+                  </tbody>
+                </table>
+              </Paper>
+              <Paper className={styles.paper}>
+                <h3>Stats</h3>
+                <table className="table table-striped">
                   <tbody>
                     {pokemon.stats.map(this.mapStats)}
                   </tbody>
