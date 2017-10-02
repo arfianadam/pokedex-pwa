@@ -1,5 +1,6 @@
 # Pokedex PWA
 Live at: https://pokedex.arfianadam.com
+![PokedexPWALogo](https://github.com/arfianadam/pokedex-pwa/raw/master/static/logo.png)
 
 ### Description
 It is a pokedex full of all pokemon from all generations. It is a PWA so you can add it to your home screen and open it later even if you don't have internet connection (Android only, only on pokemons you already opened)! Here are some of the features:
