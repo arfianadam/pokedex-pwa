@@ -54,3 +54,11 @@ I also decided to continue this development to create a truly immersive Pokedex 
 - [ ] Add error image handler on every image by creating custom image component. Because some pokemon images are missing.
 - [ ] Think a new caching strategy to ensure better offline viewing.
 - [ ] ??? You decide
+
+### About this application structures and how it works
+- No server side data fetching because I want this to be as responsive as possible
+- All pokemon are loaded in the initial render because the API doesn't have endpoint for searching a pokemon. So I need the complete list of pokemon to enable pokemon searching.
+- But the detail of the pokemon is not chain-loaded after the load of the pokemon list because then it will take much much much longer to get the complete data. One pokemon's detail size can be as big as hundreds of kilobytes!
+- Components must be separated into two components at least, one is smart component, the other is dumb component. Smart component will handle all data fetching and management including connecting to redux store and other side-effect things. Dumb component is for presentational only and for some DOM manipulation. This is to avoid spaghetti code when the application gets bigger and more complex.
+- Any API response for more detailed information about pokemon or pokemon type is not stored on redux store, because it will increase the complexness of handling offline data (can be improved). All requests are cached by the service workers.
+- The list of pokemon is limited only to 20 pokemons and gradually increase as the user scrolls through the page. Rendering all 800 pokemons at once will reduce site performance significantly.
