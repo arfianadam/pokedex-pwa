@@ -46,7 +46,7 @@ export default class App extends Component {
       >
         <div className={styles.app}>
           <Helmet {...config.app.head} />
-          <Header path={location.pathname} />
+          <Header path={location.pathname} pathAction={location.action} />
           {children}
         </div>
       </MuiThemeProvider>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
+import { push, go } from 'react-router-redux';
 import config from 'config';
 import { searchNow } from 'redux/modules/search';
 import { capitalizeFirstLetter } from 'helpers/polyfill';
@@ -19,12 +19,24 @@ export default class Header extends Component {
     search: PropTypes.object.isRequired,
     path: PropTypes.string.isRequired,
     type: PropTypes.object.isRequired,
-    pokemon: PropTypes.object.isRequired
+    pokemon: PropTypes.object.isRequired,
+    pathAction: PropTypes.string.isRequired
   }
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      direct: false
+    };
+  }
+
+  componentWillMount() {
+    const { pathAction } = this.props;
+    if (pathAction === 'POP') {
+      this.setState(() => ({
+        direct: true
+      }));
+    }
   }
 
   getTitle = () => {
@@ -48,6 +60,19 @@ export default class Header extends Component {
     dispatch(push(path));
   }
 
+  goBack = () => {
+    const { dispatch } = this.props;
+    const { direct } = this.state;
+    if (direct) {
+      this.setState(() => ({
+        direct: false
+      }));
+      this.navigateTo('/');
+    } else {
+      dispatch(go(-1));
+    }
+  }
+
   search = () => {
     const { dispatch, search } = this.props;
     dispatch(searchNow(search.value));
@@ -60,6 +85,7 @@ export default class Header extends Component {
         title={this.getTitle()}
         path={path}
         navigateTo={this.navigateTo}
+        goBack={this.goBack}
         search={this.search}
       />
     );

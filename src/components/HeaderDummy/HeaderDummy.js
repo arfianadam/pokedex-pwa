@@ -12,6 +12,7 @@ export default class HeaderDummy extends Component {
   static propTypes = {
     title: PropTypes.node.isRequired,
     navigateTo: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
     search: PropTypes.func.isRequired,
     path: PropTypes.string.isRequired
   }
@@ -24,7 +25,7 @@ export default class HeaderDummy extends Component {
   }
 
   getLeftIcon = () => {
-    const { path } = this.props;
+    const { path, goBack } = this.props;
     if (path === '/') {
       return (
         <IconButton
@@ -36,7 +37,7 @@ export default class HeaderDummy extends Component {
     }
     return (
       <IconButton
-        onClick={this.navigateTo('/')}
+        onClick={goBack}
       >
         <NavigationBack />
       </IconButton>
